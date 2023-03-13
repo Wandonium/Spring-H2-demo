@@ -31,7 +31,8 @@ public class DepartmentServiceImpl implements DepartmentService {
         if(department.isPresent()) {
             return department.get();
         } else {
-            throw new DepartmentNotFoundException("Department by ID " + departmentId + " not found!");
+            throw new DepartmentNotFoundException("Error! Department with ID "
+                    + departmentId + " not found in DB!");
         }
     }
 
