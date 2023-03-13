@@ -3,6 +3,8 @@ package com.wandonium.h2demo.service;
 import com.wandonium.h2demo.entity.Department;
 import com.wandonium.h2demo.repository.DepartmentRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ class DepartmentServiceTest {
     }
 
     @Test
+    @DisplayName("Get department based on valid department name.")
+    // how to disable given test
+    //@Disabled
     public void whenValidDepartmentName_ThenDepartmentShouldBeFound() {
         String departmentName = "IT";
         Department found = departmentService.getByName(departmentName);
