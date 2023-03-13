@@ -1,11 +1,13 @@
 package com.wandonium.h2demo.service;
 
 import com.wandonium.h2demo.entity.Department;
+import com.wandonium.h2demo.error.DepartmentNotFoundException;
 import com.wandonium.h2demo.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class DepartmentServiceImpl implements DepartmentService {
@@ -24,8 +26,13 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Department getDepartment(Long departmentId) {
-        return departmentRepository.findById(departmentId).get();
+    public Department getDepartment(Long departmentId) throws DepartmentNotFoundException {
+        Optional<Department> department = departmentRepository.findById(departmentId);
+        if(department.isPresent()) {
+            return department.get();
+        } else {
+            throw new DepartmentNotFoundException("Department by ID " + departmentId + " not found!");
+        }
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.wandonium.h2demo.controller;
 
 import com.wandonium.h2demo.entity.Department;
+import com.wandonium.h2demo.error.DepartmentNotFoundException;
 import com.wandonium.h2demo.service.DepartmentService;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
@@ -30,7 +31,7 @@ public class DepartmentController {
     }
 
     @GetMapping("/departments/{id}")
-    public Department getDepartment(@PathVariable("id") Long departmentId) {
+    public Department getDepartment(@PathVariable("id") Long departmentId) throws DepartmentNotFoundException {
         return departmentService.getDepartment(departmentId);
     }
 
