@@ -34,3 +34,4 @@ build/
 
 ### Configs & Passwords ###
 application.properties
+application.yml
