@@ -1,6 +1,7 @@
 package com.wandonium.h2demo.controller;
 
 import com.wandonium.h2demo.entity.Department;
+import com.wandonium.h2demo.error.DepartmentNotFoundException;
 import com.wandonium.h2demo.service.DepartmentService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,6 +58,11 @@ class DepartmentControllerTest {
     }
 
     @Test
-    void getDepartment() {
+    void getDepartment() throws Exception {
+        Mockito.when(departmentService.getDepartment(1L)).thenReturn(department);
+        mockMvc.perform(get("/departments/1")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.departmentName").value(department.getDepartmentName()));
     }
 }
